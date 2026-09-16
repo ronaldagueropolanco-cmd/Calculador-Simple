@@ -17,12 +17,29 @@ def borrar():
     pantalla.delete(0, tk.END)
 
 def calcular():
-    pass
+    try:
+        operacion_actual = pantalla.get()
+        resultado = eval(operacion_actual)
+        
+        pantalla.delete(0, tk.END)
+        pantalla.insert(0, str(resultado))
+    except Exception:
+        pantalla.delete(0, tk.END)
+        pantalla.insert(0, "Error")
 
 # Botón que limpia(borrar) la pantalla
 # Fila 0
 btn_c = tk.Button(ventana, text="C", width=5, height=2, command=borrar)
 btn_c.grid(row=2, column=0)
+
+btn_c = tk.Button(ventana, text="(", width=5, height=2, command=lambda: agregar("("))
+btn_c.grid(row=2, column=1)
+
+btn_c = tk.Button(ventana, text=")", width=5, height=2, command=lambda: agregar(")"))
+btn_c.grid(row=2, column=2)
+
+btn_c = tk.Button(ventana, text="/", width=5, height=2, command=lambda: agregar("/"))
+btn_c.grid(row=2, column=3)
 
 # 4. CREAR Y COLOCAR LOS BOTONES (Grid)
 # Fila 1
@@ -63,6 +80,17 @@ btn_3.grid(row=5, column=2, pady=7)
 
 btn_sum = tk.Button(ventana, text="+", width=5, height=2, command=lambda: agregar("+"))
 btn_sum.grid(row=5, column=3, pady=7)
+
+
+# Fila 4
+btn_0 = tk.Button(ventana, text="0", width=5, height=2, command=lambda: agregar("0"))
+btn_0.grid(row=6, column=0, pady=7)
+
+btn_punt = tk.Button(ventana, text=".", width=5, height=2, command=lambda: agregar("."))
+btn_punt.grid(row=6, column=1, pady=7)
+
+btn_igual = tk.Button(ventana, text="=", width=5, height=2, command=lambda: calcular())
+btn_igual.grid(row=6, column=2, pady=7)
 
 # 5. MANTENER LA VENTANA ABIERTA
 ventana.mainloop()
